@@ -8,12 +8,11 @@ import {
     logWarn,
 } from "./utils.js";
 import { LaTeXGenerator } from "./LaTeXGenerator.js";
-import { exec } from "child_process";
+import { spawn } from "child_process";
 import { Node } from "unified/lib/index.js";
 import { LaTeXContext } from "./LaTeXGenerator.js";
 
 const docCWD = (p: string) => process.cwd() + "/doc" + p;
-const srcCWD = (p: string) => process.cwd() + "/src" + p;
 const compiledMeta = {
     author: "Max Mustermann",
     title: "Meine tolle Bachelorarbeit",
@@ -135,27 +134,26 @@ logSuccess([`Compiled to ${outputFolder}/generated.tex`]);
 fs.writeFileSync(outputFolder + "/generated.tex", outputLaTeX);
 
 // Generate PDF
-const command = `npm run latex`;
-logInfo(["Running command"], [command]);
-exec(command, (error, stdout, stderr) => {
-    if (error) {
-        const errorMessage = error.toString();
-        const suggestion = errorMessage.includes(
-            "'texliveonfly' is not recognized"
-        )
-            ? "Install texliveonfly using tlmgr or use our Docker image to run LaTeX."
-            : "";
-        logError(
-            [
-                `Error while generating PDF.\n${errorMessage}\nERR: ${stderr}\nOUT: ${stdout}`,
-            ],
-            [suggestion]
-        );
+const command = "npm";
+const args = ["run", "latex"];
 
-        if (stdout.includes("Output written on")) {
-            logSuccess(["PDF generated successfully."]);
-        }
-        return;
+logInfo(["Running command"], [`${command} ${args.join(" ")}`]);
+
+const npmProcess = spawn(command, args, {
+    shell: true,
+});
+
+npmProcess.stdout.on("data", (data) => {
+    console.log(`stdout: ${data}`);
+    if (data.toString().includes("Output written on")) {
+        logSuccess(["PDF generated successfully."]);
     }
-    logSuccess(["PDF generated successfully."]);
+});
+
+npmProcess.stderr.on("data", (data) => {
+    logError([`STDError: ${data}`]);
+});
+
+npmProcess.on("error", (error) => {
+    logError([`Error: ${error}`]);
 });

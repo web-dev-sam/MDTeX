@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc",
     "generate": "node build/index.js && cp build/generated.pdf doc/main.pdf",
-    "latex": "texliveonfly ./build/generated.tex --compiler=lualatex --arguments='-output-directory=/workspaces/MDTeX/build/ -interaction=nonstopmode'",
+    "latex": "npx --shell /bin/ash -c \"texliveonfly ./build/generated.tex --compiler=lualatex --arguments='-output-directory=/workspaces/MDTeX/build/ -interaction=nonstopmode'\"",
     "docker": "start.bat",
     "docker:build": "docker build -t luatexmdx ."
   },
