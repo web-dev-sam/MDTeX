@@ -13,7 +13,7 @@ RUN mkdir /texlive-setup
 WORKDIR /texlive-setup
 
 # Install dependencies required for TeX Live
-RUN apk --no-cache add perl wget xz tar ca-certificates fontconfig-dev gcompat python3 py3-pip
+RUN apk --no-cache add perl wget xz tar ca-certificates fontconfig-dev gcompat python3 py3-pip git
 
 # Download and install TeX Live
 RUN wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
@@ -36,7 +36,7 @@ RUN tlmgr update --self && \
     tlmgr install texliveonfly
 
 # Install npm patch
-RUN npm install -g npm@10.2.5
+RUN npm install -g npm@10.7.0
 
 # Install fonts
 RUN apk add --no-cache font-noto ttf-freefont msttcorefonts-installer

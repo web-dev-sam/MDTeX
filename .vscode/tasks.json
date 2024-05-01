@@ -1,0 +1,61 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build MDTeX",
+            "type": "shell",
+            "command": "npm run build",
+            "presentation": {
+                "reveal": "always",
+                "focus": true
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "icon": {
+                "id": "symbol-constructor",
+                "color": "terminal.ansiGreen"
+            },
+        },
+        {
+            "label": "Generate PDF",
+            "type": "shell",
+            "command": "npm run generate",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "focus": true
+            },
+            "icon": {
+                "id": "symbol-constructor",
+                "color": "terminal.ansiGreen"
+            },
+        },
+        {
+            "label": "Refresh PDF",
+            "command": "${command:latex-workshop.refresh-viewer}",
+            "group": {
+                "kind": "build",
+            },
+            "icon": {
+                "id": "sync",
+                "color": "terminal.ansiGreen"
+            },
+        },
+        {
+            "label": "Update",
+            "icon": {
+                "id": "rocket",
+                "color": "terminal.ansiGreen"
+            },
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Generate PDF",
+                "Refresh PDF"
+            ]
+        }
+    ]
+}

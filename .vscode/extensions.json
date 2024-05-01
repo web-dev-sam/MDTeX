@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "unifiedjs.vscode-remark",
+        "ms-vscode-remote.remote-containers",
+        "redhat.vscode-yaml",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "actboy168.tasks",
+        "james-yu.latex-workshop",
+        "gruntfuggly.triggertaskonsave"
+    ]
+}
