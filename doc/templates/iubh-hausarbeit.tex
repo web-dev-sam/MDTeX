@@ -1,0 +1,197 @@
+\documentclass[11pt,oneside,titlepage,listof=totoc,bibliography=totoc]{scrartcl}
+
+\newcommand{\myAutor}{{{ AUTHOR }}}
+\newcommand{\myTitel}{{{ TITLE }}}
+\newcommand{\myBetreuer}{{{ TUTOR }}}
+\newcommand{\myLehrveranstaltung}{{{ COURSE }}}
+\newcommand{\myMatrikelNr}{{{ MATRIKEL }}}
+\newcommand{\myAbgabeDatum}{\today}
+\newcommand{\myHochschulName}{IU Internationale Hochschule}
+\newcommand{\myHochschulStandort}{Bad Honnef}
+\newcommand{\myStudiengang}{{{ STUDY }}}
+\newcommand{\myThesisArt}{{{ TYPE }}}
+\newcommand{\myAkademischerGrad}{{{ DEGREE }}}
+
+\usepackage[utf8]{luainputenc}
+\usepackage[ngerman]{babel}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage{fancyhdr}
+\usepackage{fancybox}
+\usepackage[a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage[capposition=top]{floatrow}
+\usepackage{array}
+\usepackage{float}
+\usepackage{footnote}
+\usepackage[singlelinecheck=false, labelfont=bf, font=bf]{caption}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{mathptmx}
+\usepackage{courier}
+\usepackage{amsmath}
+\usepackage[table]{xcolor}
+\usepackage{marvosym}
+\usepackage{ragged2e}
+\usepackage[hang,multiple]{footmisc}
+\usepackage[all]{nowidow}
+\usepackage{epstopdf}
+\usepackage{nicefrac}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{mdwlist}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{hyphsubst}
+\usepackage{acronym}
+\usepackage[hyperfootnotes=false]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em plus 0.5em minus 0.3em}
+\setlength{\marginparwidth}{2cm}
+\setlength{\footnotemargin}{1em}
+\renewcommand{\baselinestretch}{1.5}
+\setstretch{1.5}
+\setmainfont{Arial}
+\lstdefinelanguage{JavaScript}{
+	keywords={break, super, case, extends, switch, catch, finally, for, const, function, try, continue, if, typeof, debugger, var, default, in, void, delete, instanceof, while, do, new, with, else, return, yield, enum, let, await},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this, interface, package, private, protected, public, static},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+\lstset{
+	%language=JavaScript,
+	numbers=left,
+	numberstyle=\tiny,
+	numbersep=5pt,
+	breaklines=true,
+	showstringspaces=false,
+	frame=l ,
+	xleftmargin=5pt,
+	xrightmargin=5pt,
+	basicstyle=\ttfamily\scriptsize,
+	stepnumber=1,
+	keywordstyle=\color{blue},
+  	commentstyle=\color{dkgreen},
+  	stringstyle=\color{mauve}
+}
+\urlstyle{same}
+\HyphSubstIfExists{ngerman-x-latest}{%
+\HyphSubstLet{ngerman}{ngerman-x-latest}}{}
+\sloppy
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\setlength{\footskip}{1cm}
+\renewcommand{\headrulewidth}{0pt}
+\hypersetup{colorlinks=true, breaklinks=true, linkcolor=darkblack, citecolor=darkblack, menucolor=darkblack, urlcolor=darkblack, linktoc=all, bookmarksnumbered=false, pdfpagemode=UseOutlines, pdftoolbar=true}
+\urlstyle{same}
+
+\hypersetup{
+    pdfinfo={
+        Title={asdasd},
+        Subject={asd},
+        Author={asd},
+        Build=1.1
+    }
+}
+
+\begin{document}
+
+\pagenumbering{Roman}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\thispagestyle{empty}
+
+\renewcommand{\symheadingname}{Symbolverzeichnis}
+\newcommand{\abbreHeadingName}{Abkürzungsverzeichnis}
+\newcommand{\headingNameInternetSources}{Internetquellen}
+\newcommand{\AppendixName}{Anhang}
+
+% TITLEPAGE
+\begin{titlepage}
+	\newgeometry{left=2cm, right=2cm, top=2cm, bottom=2cm}
+	\begin{center}
+    \includegraphics[width=2.3cm]{doc/assets/IULogo.png} \\
+    \vspace{.5cm}
+		\begin{Large}\textbf{\myHochschulName}\end{Large}\\
+    \vspace{.5cm}
+		\vspace{2cm}
+    \begin{Large}\textbf{\myThesisArt}\end{Large}\\
+    \vspace{.5cm}
+    im Studiengang \myStudiengang
+		\vspace{1.7cm}
+
+		im Rahmen der Lehrveranstaltung\\
+    \vspace{0.5cm}
+		\begin{Large}{\myLehrveranstaltung}\end{Large}\\
+		\vspace{1.8cm}
+		über das Thema\\
+    \vspace{0.5cm}
+		\large{\textbf{\myTitel}}\\
+		\vspace{2cm}
+    von\\
+    \vspace{0.5cm}
+    \begin{Large}{\myAutor}\end{Large}\\
+	\end{center}
+	\normalsize
+	\vfill
+    \begin{tabular}{ l l }
+        Tutor: & \myBetreuer\\
+        Matrikelnummer: & \myMatrikelNr\\
+        Abgabedatum: & \myAbgabeDatum
+    \\
+    \end{tabular}
+\end{titlepage}
+% TITLEPAGE
+
+\addtocontents{toc}{\protect\enlargethispage{-20mm}}% Die Zeile sorgt dafür, dass das Inhaltsverzeichnisseite auf die zweite Seite gestreckt wird und somit schick aussieht. Das sollte eigentlich automatisch funktionieren. Wer rausfindet wie, kann das gern ändern.
+\setcounter{tocdepth}{4}
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+\clearpage
+
+\setcounter{page}{0}
+\thispagestyle{empty}
+\listoffigures
+\newpage
+\clearpage
+
+\setcounter{page}{0}
+
+\section*{Abkürzungsverzeichnis}
+\begin{acronym}[WYSIWYG]\itemsep0pt %der Parameter in Klammern sollte die längste Abkürzung sein. Damit wird der Abstand zwischen Abkürzung und Übersetzung festgelegt
+{{ ACRONYMS }}
+\end{acronym}
+\newpage
+
+\pagenumbering{arabic}
+
+
+{{ DOCUMENT }}
+
+
+\newpage
+\addcontentsline{toc}{section}{Literaturverzeichnis}
+\section*{Literaturverzeichnis}
+
+\section*{Anhang}
+\newpage
+
+%\addcontentsline{toc}{section}{Anhang}
+%\section*{Anhang}
+\newpage
+
+\end{document}

@@ -1,0 +1,33 @@
+{
+  "name": "mdtex",
+  "version": "0.0.1",
+  "description": "Convert Markdown to LaTeX based on templates",
+  "type": "module",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "/build"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "generate": "node build/index.js && cp build/generated.pdf doc/main.pdf",
+    "latex": "texliveonfly ./build/generated.tex --compiler=lualatex --arguments='-output-directory=/workspaces/MDTeX/build/ -interaction=nonstopmode'",
+    "docker": "start.bat",
+    "docker:build": "docker build -t luatexmdx ."
+  },
+  "author": "Samuel Braun",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "remark": "^15.0.1",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "unified": "^11.0.4",
+    "yaml": "^2.3.4"
+  }
+}
