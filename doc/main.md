@@ -25,7 +25,8 @@ acronyms:
 - **_Das ist fett und kursiv_**.
 - ~~Das ist durchgestrichen~~.
 - `Das ist eine Codezeile`.
-- Das geht klar: coöperate, naïve, Café
+- Sonderzeichen: coöperate, naïve, Café
+- Raw LaTeX: \Rightarrow \LaTeX \Leftarrow
 
 ## Abkürzungen
 
