@@ -15,3 +15,7 @@
 1. Open VSCode
 2. Edit `main.md`
 3. Save *(Save twice to see metadata updates like table of contents, why? because latex is great)*
+
+### Example
+- **Your Markdown:** [doc/main.md](https://github.com/web-dev-sam/MDTeX/blob/main/doc/main.md)
+- **Resulting PDF:** [doc/main.pdf](https://github.com/web-dev-sam/MDTeX/blob/main/doc/main.pdf)
