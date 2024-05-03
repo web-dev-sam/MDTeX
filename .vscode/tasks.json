@@ -29,6 +29,30 @@
             }
         },
         {
+            "label": "Generate TeX",
+            "type": "shell",
+            "command": "npm run generate-tex",
+            "presentation": {
+                "reveal": "always",
+                "focus": true
+            },
+            "icon": {
+                "id": "debug-alt",
+                "color": "terminal.ansiWhite"
+            },
+            "options": {
+                "statusbar": {
+                    "label": "",
+                    "detail": "Generate TeX",
+                    "running": {
+                        "icon": {
+                            "id": "sync~spin",
+                        }
+                    }
+                }
+            }
+        },
+        {
             "label": "Generate PDF",
             "type": "shell",
             "command": "npm run generate",

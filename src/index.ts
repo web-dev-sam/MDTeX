@@ -72,26 +72,43 @@ latexGenerator.registerProcessor({
                 );
             case "paragraph":
                 const result = node.aggregatedValue
-                    .replace(/#\((\w+)\)/g, "\\acf{$1}")
+                    .replace(/#\((\w+)\)/g, "\\ac{$1}")
+                    .replace(/#full\((\w+)\)/g, "\\acf{$1}")
+                    .replace(/#long\((\w+)\)/g, "\\acl{$1}")
+                    .replace(/#short\((\w+)\)/g, "\\acs{$1}")
                     .replace(/([A-Za-z])\((.*)\)/g, "$1\\footnote{$2}");
                 return `${result}\n`;
             case "text":
                 return node.aggregatedValue;
             case "inlineCode":
-                return `\\texttt{${node.aggregatedValue}}`;
+                return `\\code{${node.aggregatedValue}}`;
             case "strong":
                 return `\\textbf{${node.aggregatedValue}}`;
             case "emphasis":
                 return `\\textit{${node.aggregatedValue}}`;
+            case "delete":
+                return `\\sout{${node.aggregatedValue}}`;
             case "link":
-                if (node.title != null) {
-                    return `\\href{${node.url}}{${node.title}}`;
+                const named = !node.aggregatedValue.startsWith("http");
+                if (named) {
+                    return `\\href{${node.url}}{${node.aggregatedValue}}`;
                 }
                 return `\\url{${node.url}}`;
             case "image":
-                return `\n\n\\begin{figure}[H]\n\\centering\n\\includegraphics[width=0.5\\textwidth]{${node.url}}\n\\caption{${node.alt}}\n\\end{figure}\n\n`;
+                return `\n\n\\begin{figure}[H]\n\\centering\n\\includegraphics[width=0.5\\textwidth]{${"doc/assets/" + node.url}}\n\\caption{${node.alt}}\n\\end{figure}\n\n`;
             case "html":
                 return "";
+            case "list":
+                return (
+                    {
+                        ordered: `\\begin{enumerate}\n${node.aggregatedValue}\\end{enumerate}\n`,
+                        unordered: `\\begin{itemize}\n${node.aggregatedValue}\\end{itemize}\n`,
+                    }[node.ordered ? "ordered" : "unordered"] ?? ""
+                );
+            case "listItem":
+                return `\\item ${node.aggregatedValue}\n`;
+            case "thematicBreak":
+                return "\\newpage\n";
             default:
                 logWarn([`Unhandled node type: ${node.type}`]);
                 break;
@@ -134,26 +151,28 @@ logSuccess([`Compiled to ${outputFolder}/generated.tex`]);
 fs.writeFileSync(outputFolder + "/generated.tex", outputLaTeX);
 
 // Generate PDF
-const command = "npm";
-const args = ["run", "latex"];
+if (!process.argv.includes("--no-pdf")) {
+    const command = "npm";
+    const args = ["run", "latex"];
 
-logInfo(["Running command"], [`${command} ${args.join(" ")}`]);
+    logInfo(["Running command"], [`${command} ${args.join(" ")}`]);
 
-const npmProcess = spawn(command, args, {
-    shell: true,
-});
+    const npmProcess = spawn(command, args, {
+        shell: true,
+    });
 
-npmProcess.stdout.on("data", (data) => {
-    console.log(`stdout: ${data}`);
-    if (data.toString().includes("Output written on")) {
-        logSuccess(["PDF generated successfully."]);
-    }
-});
+    npmProcess.stdout.on("data", (data) => {
+        console.log(`stdout: ${data}`);
+        if (data.toString().includes("Output written on")) {
+            logSuccess(["PDF generated successfully."]);
+        }
+    });
 
-npmProcess.stderr.on("data", (data) => {
-    logError([`STDError: ${data}`]);
-});
+    npmProcess.stderr.on("data", (data) => {
+        logError([`STDError: ${data}`]);
+    });
 
-npmProcess.on("error", (error) => {
-    logError([`Error: ${error}`]);
-});
+    npmProcess.on("error", (error) => {
+        logError([`Error: ${error}`]);
+    });
+}

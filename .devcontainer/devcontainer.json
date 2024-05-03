@@ -11,12 +11,10 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"unifiedjs.vscode-remark",
 				"redhat.vscode-yaml",
 				"dbaeumer.vscode-eslint",
 				"esbenp.prettier-vscode",
 				"actboy168.tasks",
-				"unifiedjs.vscode-remark",
 				"james-yu.latex-workshop",
 				"gruntfuggly.triggertaskonsave"
 			]

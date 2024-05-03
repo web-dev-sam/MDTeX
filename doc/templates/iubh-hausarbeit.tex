@@ -48,7 +48,15 @@
 \usepackage{url}
 \usepackage{hyphsubst}
 \usepackage{acronym}
-\usepackage[hyperfootnotes=false]{hyperref}
+\usepackage{tocloft}
+\usepackage[normalem]{ulem}
+\usepackage[hyperfootnotes=true]{hyperref}
+
+\definecolor{darkblack}{rgb}{0,0,0}
+\definecolor{dunkelgrau}{rgb}{0.8,0.8,0.8}
+\definecolor{hellgrau}{rgb}{0.9,0.9,0.95}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.8em plus 0.5em minus 0.3em}
@@ -57,6 +65,10 @@
 \renewcommand{\baselinestretch}{1.5}
 \setstretch{1.5}
 \setmainfont{Arial}
+
+\setmonofont{Noto Sans Mono}[Scale=0.90]
+\newcommand{\code}[1]{{\ttfamily\colorbox{hellgrau}{#1}}}
+
 \lstdefinelanguage{JavaScript}{
 	keywords={break, super, case, extends, switch, catch, finally, for, const, function, try, continue, if, typeof, debugger, var, default, in, void, delete, instanceof, while, do, new, with, else, return, yield, enum, let, await},
 	keywordstyle=\color{blue}\bfseries,
@@ -99,11 +111,15 @@
 \hypersetup{colorlinks=true, breaklinks=true, linkcolor=darkblack, citecolor=darkblack, menucolor=darkblack, urlcolor=darkblack, linktoc=all, bookmarksnumbered=false, pdfpagemode=UseOutlines, pdftoolbar=true}
 \urlstyle{same}
 
+\newcommand*{\nsection}[1]{
+    \addcontentsline{toc}{section}{\protect\nonumberline #1}
+}
+
 \hypersetup{
     pdfinfo={
-        Title={asdasd},
-        Subject={asd},
-        Author={asd},
+        Title={\myTitel},
+        Subject={\myTitel},
+        Author={\myAutor},
         Build=1.1
     }
 }
@@ -113,11 +129,6 @@
 \pagenumbering{Roman}
 \newcolumntype{C}{>{\centering\arraybackslash}X}
 \thispagestyle{empty}
-
-\renewcommand{\symheadingname}{Symbolverzeichnis}
-\newcommand{\abbreHeadingName}{Abkürzungsverzeichnis}
-\newcommand{\headingNameInternetSources}{Internetquellen}
-\newcommand{\AppendixName}{Anhang}
 
 % TITLEPAGE
 \begin{titlepage}
@@ -156,42 +167,39 @@
 \end{titlepage}
 % TITLEPAGE
 
+\pagenumbering{Roman}
+
 \addtocontents{toc}{\protect\enlargethispage{-20mm}}% Die Zeile sorgt dafür, dass das Inhaltsverzeichnisseite auf die zweite Seite gestreckt wird und somit schick aussieht. Das sollte eigentlich automatisch funktionieren. Wer rausfindet wie, kann das gern ändern.
 \setcounter{tocdepth}{4}
 \tableofcontents
-\thispagestyle{empty}
 \newpage
-\clearpage
 
-\setcounter{page}{0}
-\thispagestyle{empty}
+\setcounter{page}{1}
 \listoffigures
+\nsection{Abbildungsverzeichnis}
 \newpage
-\clearpage
 
-\setcounter{page}{0}
-
-\section*{Abkürzungsverzeichnis}
+\nsection{Abkürzungsverzeichnis}
 \begin{acronym}[WYSIWYG]\itemsep0pt %der Parameter in Klammern sollte die längste Abkürzung sein. Damit wird der Abstand zwischen Abkürzung und Übersetzung festgelegt
 {{ ACRONYMS }}
 \end{acronym}
 \newpage
 
 \pagenumbering{arabic}
+\setcounter{page}{1}
 
 
 {{ DOCUMENT }}
 
+\newpage
+\pagenumbering{Roman}
+\setcounter{page}{3}
+
+\nsection{Literaturverzeichnis}
+
 
 \newpage
-\addcontentsline{toc}{section}{Literaturverzeichnis}
-\section*{Literaturverzeichnis}
+\nsection{Anhang}
 
-\section*{Anhang}
-\newpage
-
-%\addcontentsline{toc}{section}{Anhang}
-%\section*{Anhang}
-\newpage
 
 \end{document}

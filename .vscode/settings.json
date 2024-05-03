@@ -5,9 +5,6 @@
       "output/**/*.schema.yaml"
     ]
   },
-  "[markdown]": {
-    "editor.defaultFormatter": "unifiedjs.vscode-remark"
-  },
   "triggerTaskOnSave.tasks": {
     "Update": [
       "doc/main.md",
