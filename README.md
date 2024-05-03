@@ -1,8 +1,8 @@
 
-![Preview](/preview.png)
+<img src="/preview.png" width="75%">
 
 ### First Setup
-1. Open repo in vscode dev container
+1. Open repo as VSCode dev container
 2. Run `npm i`
 3. Click on "Build MDTeX" *(wait for it to finish)*
 4. Click on "Generate PDF" *(first run may fail due to missing packages, run again after)*
