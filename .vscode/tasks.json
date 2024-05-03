@@ -14,8 +14,19 @@
             },
             "icon": {
                 "id": "symbol-constructor",
-                "color": "terminal.ansiGreen"
+                "color": "terminal.ansiWhite"
             },
+            "options": {
+                "statusbar": {
+                    "label": "",
+                    "detail": "Build MDTeX",
+                    "running": {
+                        "icon": {
+                            "id": "sync~spin",
+                        }
+                    }
+                }
+            }
         },
         {
             "label": "Generate PDF",
@@ -27,12 +38,40 @@
             },
             "presentation": {
                 "reveal": "always",
-                "focus": true
+                "focus": true,
+                "panel": "dedicated"
             },
             "icon": {
-                "id": "symbol-constructor",
+                "id": "rocket",
                 "color": "terminal.ansiGreen"
             },
+            "options": {
+                "statusbar": {
+                    "label": "Generate PDF",
+                    "detail": "Generate PDF",
+                    "running": {
+                        "icon": {
+                            "id": "sync~spin",
+                        },
+                    }
+                }
+            }
+        },
+        {
+            "label": "Open PDF",
+            "type": "shell",
+            "command": "npm run open",
+            "group": {
+                "kind": "build"
+            },
+            "icon": {
+                "id": "file-pdf",
+                "color": "terminal.ansiWhite"
+            },
+            "presentation": {
+                "reveal": "always",
+                "focus": true
+            }
         },
         {
             "label": "Refresh PDF",
@@ -42,20 +81,29 @@
             },
             "icon": {
                 "id": "sync",
-                "color": "terminal.ansiGreen"
+                "color": "terminal.ansiWhite"
             },
         },
         {
             "label": "Update",
-            "icon": {
-                "id": "rocket",
-                "color": "terminal.ansiGreen"
+            "group": {
+                "kind": "build",
+            },
+            "presentation": {
+                "reveal": "always",
+                "focus": false
             },
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Generate PDF",
                 "Refresh PDF"
-            ]
+            ],
+            "options": {
+                "statusbar": {
+                    "label": "",
+                    "detail": "",
+                }
+            }
         }
     ]
 }
