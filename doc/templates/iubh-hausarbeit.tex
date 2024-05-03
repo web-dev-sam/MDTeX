@@ -12,7 +12,6 @@
 \newcommand{\myThesisArt}{{{ TYPE }}}
 \newcommand{\myAkademischerGrad}{{{ DEGREE }}}
 
-\usepackage[utf8]{luainputenc}
 \usepackage[ngerman]{babel}
 \usepackage[babel,german=quotes]{csquotes}
 \usepackage{fancyhdr}
@@ -21,8 +20,6 @@
 \usepackage{setspace}
 \usepackage{fontspec}
 \usepackage{graphicx}
-\usepackage{colortbl}
-\usepackage[capposition=top]{floatrow}
 \usepackage{array}
 \usepackage{float}
 \usepackage{footnote}
@@ -31,33 +28,27 @@
 \usepackage{enumitem}
 \usepackage{amssymb}
 \usepackage{mathptmx}
-\usepackage{courier}
 \usepackage{amsmath}
-\usepackage[table]{xcolor}
+\usepackage{xcolor}
 \usepackage{marvosym}
 \usepackage{ragged2e}
 \usepackage[hang,multiple]{footmisc}
 \usepackage[all]{nowidow}
-\usepackage{epstopdf}
 \usepackage{nicefrac}
 \usepackage{multirow}
-\usepackage{rotating}
 \usepackage{mdwlist}
 \usepackage{tabularx}
 \usepackage{listings}
 \usepackage{url}
 \usepackage{hyphsubst}
 \usepackage{acronym}
-\usepackage{tocloft}
 \usepackage[normalem]{ulem}
 \usepackage[hyperfootnotes=true]{hyperref}
 
 \definecolor{darkblack}{rgb}{0,0,0}
-\definecolor{dunkelgrau}{rgb}{0.8,0.8,0.8}
 \definecolor{hellgrau}{rgb}{0.9,0.9,0.95}
-\definecolor{mauve}{rgb}{0.58,0,0.82}
-\definecolor{dkgreen}{rgb}{0,0.6,0}
 
+% Font/Text Style
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.8em plus 0.5em minus 0.3em}
 \setlength{\marginparwidth}{2cm}
@@ -65,56 +56,61 @@
 \renewcommand{\baselinestretch}{1.5}
 \setstretch{1.5}
 \setmainfont{Arial}
-
-\setmonofont{Noto Sans Mono}[Scale=0.90]
-\newcommand{\code}[1]{{\ttfamily\colorbox{hellgrau}{#1}}}
-
-\lstdefinelanguage{JavaScript}{
-	keywords={break, super, case, extends, switch, catch, finally, for, const, function, try, continue, if, typeof, debugger, var, default, in, void, delete, instanceof, while, do, new, with, else, return, yield, enum, let, await},
-	keywordstyle=\color{blue}\bfseries,
-	ndkeywords={class, export, boolean, throw, implements, import, this, interface, package, private, protected, public, static},
-	ndkeywordstyle=\color{darkgray}\bfseries,
-	identifierstyle=\color{black},
-	sensitive=false,
-	comment=[l]{//},
-	morecomment=[s]{/*}{*/},
-	commentstyle=\color{purple}\ttfamily,
-	stringstyle=\color{red}\ttfamily,
-	morestring=[b]',
-	morestring=[b]"
-}
-\lstset{
-	%language=JavaScript,
-	numbers=left,
-	numberstyle=\tiny,
-	numbersep=5pt,
-	breaklines=true,
-	showstringspaces=false,
-	frame=l ,
-	xleftmargin=5pt,
-	xrightmargin=5pt,
-	basicstyle=\ttfamily\scriptsize,
-	stepnumber=1,
-	keywordstyle=\color{blue},
-  	commentstyle=\color{dkgreen},
-  	stringstyle=\color{mauve}
-}
+\setmonofont{Noto Sans Mono}[Scale=0.85]
+\setkomafont{disposition}{\normalfont\bfseries}
 \urlstyle{same}
+\sloppy
+
+% Hyphenation Rules for German
 \HyphSubstIfExists{ngerman-x-latest}{%
 \HyphSubstLet{ngerman}{ngerman-x-latest}}{}
-\sloppy
+
+% Code Style
+\newcommand{\code}[1]{\ttfamily\colorbox{hellgrau}{#1}\normalfont}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{codebg}{rgb}{0.95,0.95,0.98}
+\lstdefinestyle{codestyle}{
+    backgroundcolor=\color{codebg},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,  
+	numberstyle=\tiny,                  
+    numbersep=10pt,  
+	xleftmargin=5pt,
+	xrightmargin=5pt,
+	framexleftmargin=5pt,
+	framexrightmargin=5pt,
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=codestyle}
+
+% Header and Footer Style
 \pagestyle{fancy}
 \fancyhf{}
 \fancyfoot[C]{\thepage}
-\setlength{\footskip}{1cm}
 \renewcommand{\headrulewidth}{0pt}
-\hypersetup{colorlinks=true, breaklinks=true, linkcolor=darkblack, citecolor=darkblack, menucolor=darkblack, urlcolor=darkblack, linktoc=all, bookmarksnumbered=false, pdfpagemode=UseOutlines, pdftoolbar=true}
-\urlstyle{same}
+\setlength{\footskip}{1cm}
 
+% Section without preceeding number
 \newcommand*{\nsection}[1]{
     \addcontentsline{toc}{section}{\protect\nonumberline #1}
+	\section*{#1}
 }
 
+% Hyper Setup
+\hypersetup{colorlinks=true, breaklinks=true, linkcolor=darkblack, citecolor=darkblack, menucolor=darkblack, urlcolor=darkblack, linktoc=all, bookmarksnumbered=false, pdfpagemode=UseOutlines, pdftoolbar=true}
 \hypersetup{
     pdfinfo={
         Title={\myTitel},
@@ -176,7 +172,6 @@
 
 \setcounter{page}{1}
 \listoffigures
-\nsection{Abbildungsverzeichnis}
 \newpage
 
 \nsection{Abkürzungsverzeichnis}
@@ -196,10 +191,12 @@
 \setcounter{page}{3}
 
 \nsection{Literaturverzeichnis}
+literatur...
 
 
 \newpage
 \nsection{Anhang}
+anhang...
 
 
 \end{document}

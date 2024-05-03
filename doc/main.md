@@ -26,6 +26,7 @@ acronyms:
 - ~~Das ist durchgestrichen~~.
 - `Das ist eine Codezeile`.
 - Sonderzeichen: coöperate, naïve, Café
+- Neue Seite: `<br>`
 - Raw LaTeX: \Rightarrow \LaTeX \Leftarrow
 
 ## Abkürzungen
@@ -60,7 +61,17 @@ Wow das ist ja super cool(Cool: https://de.wikipedia.org/wiki/Cool)
 
 ## Bilder
 
-![Bildbeschreibung](IULogo.png).
+![Bildbeschreibung](IULogo.png)
+
+## Code
+  
+```java
+public class Main {
+  public static void main(String[] args) {
+    System.out.println("Hello World!");
+  }
+}
+```
 
 <br>
 
