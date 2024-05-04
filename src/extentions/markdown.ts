@@ -1,23 +1,34 @@
-import { AggregatedNode } from "../utils.js";
+import { AggregatedNode, logWarn } from "../utils.js";
+
+const referenceRegex = `\\(([^\\s\\)]+)\\)`;
+const refArrowRegex = `->`;
 
 const paragraphHandlers: {
     regex: RegExp;
     handler: (node: AggregatedNode) => string;
 }[] = [
     {
-        regex: /#\((\w+)\)/g,
+        regex: new RegExp(`${refArrowRegex}${referenceRegex}`, "g"),
+        handler: () => `\\ref{fig:$1}`,
+    },
+    {
+        regex: new RegExp(`${refArrowRegex}#${referenceRegex}`, "g"),
+        handler: () => `\\ref{sec:$1}`,
+    },
+    {
+        regex: new RegExp(`#${referenceRegex}`, "g"),
         handler: () => `\\ac{$1}`,
     },
     {
-        regex: /#full\((\w+)\)/g,
+        regex: new RegExp(`#full${referenceRegex}`, "g"),
         handler: () => `\\acf{$1}`,
     },
     {
-        regex: /#long\((\w+)\)/g,
+        regex: new RegExp(`#long${referenceRegex}`, "g"),
         handler: () => `\\acl{$1}`,
     },
     {
-        regex: /#short\((\w+)\)/g,
+        regex: new RegExp(`#short${referenceRegex}`, "g"),
         handler: () => `\\acs{$1}`,
     },
     {
@@ -42,11 +53,13 @@ export const NodeHandler: Record<string, (node: AggregatedNode) => string> = {
         return `${result}\n`;
     },
     heading: (node) => {
+        const label = node.aggregatedValue.replace(/(.*)->#\(([^\s]+)\)(.*)/g, `\\label{sec:$2}`);
+        const heading = node.aggregatedValue.replace(/->#\(([^\s]+)\)/g, "");
         return (
             {
-                1: `\n\n\\section{${node.aggregatedValue}}\n`,
-                2: `\n\n\\subsection{${node.aggregatedValue}}\n`,
-                3: `\n\n\\subsubsection{${node.aggregatedValue}}\n`,
+                1: `\n\n\\section{${heading}}${heading === label ? "" : label}\n`,
+                2: `\n\n\\subsection{${heading}}${heading === label ? "" : label}\n`,
+                3: `\n\n\\subsubsection{${heading}}${heading === label ? "" : label}\n`,
             }[node.depth] ?? ""
         );
     },
@@ -60,7 +73,14 @@ export const NodeHandler: Record<string, (node: AggregatedNode) => string> = {
         return `\\url{${node.url}}`;
     },
     image: (node) => {
-        return `\\begin{figure}[H]\n\\centering\n\\includegraphics[width=0.5\\textwidth]{doc/assets/${node.url}}\n\\caption{${node.alt}}\n\\end{figure}\n`;
+        return `
+            \\begin{figure}[H]\n
+            \\centering\n
+            \\includegraphics[width=0.5\\textwidth]{doc/assets/${node.url}}\n
+            ${node.alt ? `\\caption{${node.alt}}\n` : ""}
+            ${node.title ? `\\label{fig:${node.title}}\n` : ""}
+            \\end{figure}\n
+        `;
     },
     list: (node) => {
         return (

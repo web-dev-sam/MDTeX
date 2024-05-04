@@ -14,7 +14,7 @@
 ### Workflow after First Setup
 1. Open VSCode
 2. Edit `main.md`
-3. Save *(Save twice to see metadata updates like table of contents, why? because latex is great)*
+3. Save *(Save twice to see metadata updates like table of contents & references. Why? because latex is great)*
 
 ### Example
 - **Your Markdown:** [doc/main.md](https://github.com/web-dev-sam/MDTeX/blob/main/doc/main.md)
