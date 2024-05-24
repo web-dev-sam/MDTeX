@@ -13,7 +13,7 @@
     "generate": "node build/index.js && cp build/generated.pdf doc/main.pdf",
     "generate-tex": "node build/index.js --no-pdf",
     "open": "code doc/main.pdf",
-    "latex": "npx --shell /bin/ash -c \"texliveonfly ./build/generated.tex --compiler=lualatex --arguments='-output-directory=/workspaces/MDTeX/build/ -interaction=nonstopmode'\"",
+    "latex": "npx --shell /bin/ash -c \"texliveonfly ./build/generated.tex --compiler=lualatex --arguments='-output-directory=build/ -interaction=nonstopmode'\"",
     "docker": "start.bat",
     "docker:build": "docker build -t luatexmdx ."
   },
